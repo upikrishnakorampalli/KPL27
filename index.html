@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KPL27 | Cricket Auction</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="brand">
+        <div class="brand-icon">🏏</div>
+
+        <div>
+            <h1>KPL<span>27</span></h1>
+            <p>CRICKET PLAYER AUCTION</p>
+        </div>
+    </div>
+
+    <div class="header-status">
+        <div class="season-box">
+            <small>SEASON</small>
+            <strong>2027</strong>
+        </div>
+
+        <div id="auctionStatus" class="live-status">
+            ● AUCTION READY
+        </div>
+    </div>
+
+</header>
+
+
+<!-- ================= TEAM SELECTION ================= -->
+
+<section id="teamSelection" class="team-selection">
+
+    <div class="selection-container">
+
+        <div class="selection-title">
+            <span>🏆</span>
+            <div>
+                <h2>Choose Your Franchise</h2>
+                <p>You control one team. Other teams are controlled by AI.</p>
+            </div>
+        </div>
+
+        <div id="selectionTeams" class="selection-teams"></div>
+
+        <div class="selected-team-box">
+
+            <div>
+                <small>SELECTED TEAM</small>
+                <h3 id="selectedTeamName">SELECT A TEAM</h3>
+            </div>
+
+            <div>
+                <small>PURSE</small>
+                <strong id="selectedTeamPurse">₹100 Cr</strong>
+            </div>
+
+            <div>
+                <small>SQUAD</small>
+                <strong id="selectedTeamSquad">0 / 25</strong>
+            </div>
+
+        </div>
+
+        <button id="startAuctionBtn" class="start-auction-btn" disabled>
+            SELECT A TEAM
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AUCTION APP ================= -->
+
+<main id="auctionApp" class="auction-app hidden">
+
+
+    <!-- ================= AUCTION TOP BAR ================= -->
+
+    <section class="auction-topbar">
+
+        <div class="auction-info">
+            <span>AUCTION PLAYER</span>
+            <strong id="playerNumber">1</strong>
+        </div>
+
+        <div class="auction-info">
+            <span>YOUR TEAM</span>
+            <strong id="myTeamName">RCB</strong>
+        </div>
+
+        <div class="auction-info">
+            <span>YOUR PURSE</span>
+            <strong id="myTeamPurse">₹100 Cr</strong>
+        </div>
+
+        <div class="auction-info">
+            <span>TIME</span>
+            <strong id="timer">30</strong>
+        </div>
+
+    </section>
+
+
+    <!-- ================= MAIN AUCTION ================= -->
+
+    <section class="auction-main">
+
+
+        <!-- LEFT PLAYER AREA -->
+
+        <div class="player-section">
+
+            <div class="player-card">
+
+                <div class="player-heading">
+
+                    <div>
+                        <span class="eyebrow">CURRENT PLAYER</span>
+
+                        <h2 id="playerName">
+                            Virat Kohli
+                        </h2>
+
+                        <p id="playerRole">
+                            Batter
+                        </p>
+                    </div>
+
+                    <div id="playerCategory" class="category-badge">
+                        BATTER
+                    </div>
+
+                </div>
+
+
+                <div class="player-body">
+
+                    <div class="player-visual">
+
+                        <div class="player-role-image">
+
+                            <div id="roleIcon" class="role-icon">
+                                🏏
+                            </div>
+
+                            <span>KPL27</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="player-information">
+
+                        <div class="info-grid">
+
+                            <div class="info-item">
+                                <span>COUNTRY</span>
+                                <strong id="playerCountry">
+                                    INDIA
+                                </strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>AGE</span>
+                                <strong id="playerAge">
+                                    28
+                                </strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>STYLE</span>
+                                <strong id="playerStyle">
+                                    RIGHT HAND
+                                </strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>POSITION</span>
+                                <strong id="playerPosition">
+                                    BATTER
+                                </strong>
+                            </div>
+
+                            <div class="info-item">
+                                <span>BASE PRICE</span>
+                                <strong id="basePrice">
+                                    ₹25 L
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="current-bid-panel">
+
+                            <div class="bid-main">
+
+                                <span>CURRENT BID</span>
+
+                                <strong id="currentBid">
+                                    ₹25 L
+                                </strong>
+
+                            </div>
+
+                            <div class="highest-bid">
+
+                                <span>HIGHEST BIDDER</span>
+
+                                <strong id="highestBidder">
+                                    NO BID
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div id="bidMessage" class="bid-message">
+                            Auction is ready.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT BIDDING AREA -->
+
+        <aside class="bidding-section">
+
+            <div class="bidding-card">
+
+                <div class="bidding-header">
+
+                    <span>LIVE BIDDING</span>
+
+                    <div id="biddingIndicator" class="bidding-indicator">
+                        READY
+                    </div>
+
+                </div>
+
+
+                <div class="big-price">
+
+                    <small>CURRENT PRICE</small>
+
+                    <strong id="bigCurrentBid">
+                        ₹25 L
+                    </strong>
+
+                </div>
+
+
+                <button id="bidBtn" class="bid-btn">
+                    🔨 BID
+                    
+                </button>
+
+
+                <button id="passBtn" class="pass-btn">
+                    ✋ PASS
+                </button>
+
+
+                <div class="bid-controls-extra">
+
+                    <button id="pauseBtn" class="pause-btn">
+                        ⏸ PAUSE
+                    </button>
+
+                    <button id="nextPlayerBtn" class="next-btn">
+                        NEXT PLAYER
+                    </button>
+
+                </div>
+
+
+                <div class="bidding-note">
+
+                    <strong>Bid Rules</strong>
+
+                    <p>
+                        Starting increment:
+                        <b>₹25 L</b>
+                    </p>
+
+                    <p>
+                        Above ₹2.5 Cr:
+                        <b>₹50 L</b>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+
+    <!-- ================= TABS ================= -->
+
+    <section class="dashboard-tabs">
+
+        <button class="tab-btn active" data-tab="teamsTab">
+            🏆 TEAMS
+        </button>
+
+        <button class="tab-btn" data-tab="playersTab">
+            👥 PLAYERS
+        </button>
+
+        <button class="tab-btn" data-tab="historyTab">
+            📜 AUCTION HISTORY
+        </button>
+
+    </section>
+
+
+    <!-- ================= TEAMS TAB ================= -->
+
+    <section id="teamsTab" class="tab-content active">
+
+        <div class="section-title">
+
+            <div>
+                <span>FRANCHISES</span>
+                <h2>KPL27 Teams</h2>
+            </div>
+
+            <p>
+                Click a team to see squad details
+            </p>
+
+        </div>
+
+        <div id="teamsDashboard" class="teams-dashboard"></div>
+
+    </section>
+
+
+    <!-- ================= PLAYERS TAB ================= -->
+
+    <section id="playersTab" class="tab-content">
+
+        <div class="section-title">
+
+            <div>
+                <span>AUCTION POOL</span>
+                <h2>150 Players</h2>
+            </div>
+
+            <input
+                id="playerSearch"
+                class="player-search"
+                type="text"
+                placeholder="Search player..."
+            >
+
+        </div>
+
+        <div id="playersDashboard" class="players-dashboard"></div>
+
+    </section>
+
+
+    <!-- ================= HISTORY TAB ================= -->
+
+    <section id="historyTab" class="tab-content">
+
+        <div class="section-title">
+
+            <div>
+                <span>COMPLETED SALES</span>
+                <h2>Auction History</h2>
+            </div>
+
+            <strong id="historyCount">
+                0 SOLD
+            </strong>
+
+        </div>
+
+        <div id="historyDashboard" class="history-dashboard">
+
+            <div class="empty-history">
+                No players sold yet.
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+<section class="bottom-actions">
+    <button id="backToTeamsBtn" class="back-to-teams-btn hidden" type="button">
+        ⬅ BACK
+    </button>
+</section>
+
+
+<!-- ================= TEAM DETAILS MODAL ================= -->
+
+<div id="teamModal" class="modal hidden">
+
+    <div class="modal-box">
+
+        <button id="closeModal" class="close-modal">
+            ×
+        </button>
+
+        <div id="modalTeamLogo" class="modal-logo">
+            🏆
+        </div>
+
+        <h2 id="modalTeamName">RCB</h2>
+
+        <div class="modal-stats">
+
+            <div>
+                <span>PURSE</span>
+                <strong id="modalPurse">₹100 Cr</strong>
+            </div>
+
+            <div>
+                <span>PLAYERS</span>
+                <strong id="modalSquad">0</strong>
+            </div>
+
+            <div>
+                <span>SPENT</span>
+                <strong id="modalSpent">₹0</strong>
+            </div>
+
+        </div>
+
+        <h3>Squad</h3>
+
+        <div id="modalPlayers" class="modal-players"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= AUCTION SOLD OVERLAY ================= -->
+
+<div id="soldOverlay" class="sold-overlay hidden">
+
+    <div class="sold-animation">
+
+        <div class="sold-hammer">
+            🔨
+        </div>
+
+        <div class="sold-label">
+            PLAYER SOLD
+        </div>
+
+        <h1 id="soldPlayerName">
+            VIRAT KOHLI
+        </h1>
+
+        <p id="soldTeamName">
+            SOLD TO RCB
+        </p>
+
+        <strong id="soldPrice">
+            ₹2.50 Cr
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- ================= START PERMISSION ================= -->
+
+<div id="startPermission" class="permission-overlay hidden">
+
+    <div class="permission-box">
+
+        <div class="permission-icon">
+            🔨
+        </div>
+
+        <h2>Start KPL27 Auction?</h2>
+
+        <p>
+            You selected <strong id="permissionTeam">RCB</strong>.
+            Do you want to start the live auction?
+        </p>
+
+        <div class="permission-buttons">
+
+            <button id="confirmStart" class="confirm-btn">
+                START AUCTION
+            </button>
+
+            <button id="cancelStart" class="cancel-btn">
+                CANCEL
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
